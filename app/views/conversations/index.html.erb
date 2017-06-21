@@ -1,4 +1,6 @@
 <h1>All conversations</h1>
+<h2>Unread messages</h2>
+<p><%= p @unread %> lolo </p>
 
 <% @conversations.each do |conversation| %>
   <div>
@@ -8,3 +10,4 @@
 
 <%= link_to 'new conversation', new_conversation_path %>
 
+t
