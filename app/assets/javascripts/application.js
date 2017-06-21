@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require bootstrap
 //= require_tree .
 
 var timeout = setTimeout("location.reload(true);",600000);
