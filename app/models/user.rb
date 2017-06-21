@@ -9,8 +9,4 @@ class User < ApplicationRecord
   def mailboxer_email(_object)
     nil
   end
-
-  def name
-    "User #{id}"
-  end
 end
