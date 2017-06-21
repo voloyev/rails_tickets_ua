@@ -1,13 +1,18 @@
-<h1>All conversations</h1>
-<h2>Unread messages</h2>
-<p><%= p @unread %> lolo </p>
-
-<% @conversations.each do |conversation| %>
-  <div>
-    <%= link_to conversation.subject, conversation_path(conversation) %>
+<% page_header 'Your conversations' %>
+<div class="row">
+  <div class="col-sm-9">
+    <ul class="nav nav-tabs nav-justified">
+      <%= mailbox_section 'inbox', @box %>
+      <%= mailbox_section 'sent', @box %>
+      <%= mailbox_section 'trash', @box %>
+    </ul>
   </div>
-<% end %>
 
-<%= link_to 'new conversation', new_conversation_path %>
+  <div class="col-sm-9">
+    <ul class="list-group">
+      <%= render partial: 'conversations/conversation', collection: @conversations %>
+    </ul>
 
-t
+    <%= will_paginate %>
+  </div>
+</div>
