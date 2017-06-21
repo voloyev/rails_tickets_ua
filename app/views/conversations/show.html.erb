@@ -1,0 +1,15 @@
+<h1>
+  <%= @conversation.subject %>
+</h1>
+
+<% @conversation.receipts_for(current_user).each do |r| %>
+  <div>
+    <%= r.message.sender %>
+  </div>
+  
+  <div>
+    <%= r.message.body %>
+  </div>
+<% end %>
+
+
