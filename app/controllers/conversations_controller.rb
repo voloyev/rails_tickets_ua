@@ -3,6 +3,7 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = current_user.mailbox.conversations
+    @unread = unread_messages
   end
 
   def show
@@ -17,5 +18,17 @@ class ConversationsController < ApplicationController
     recipient = User.find(params[:user_id])
     receipt   = current_user.send_message(recipient, params[:body], params[:subject])
     redirect_to conversation_path receipt.conversation
+  end
+
+  private
+
+  def unread_messages
+    @unread = 0
+    @conversations.map do |c|
+      c.messages.each do |m|
+        @unread += 1 if m.is_unread?(current_user)
+      end
+    end
+    @unread
   end
 end
