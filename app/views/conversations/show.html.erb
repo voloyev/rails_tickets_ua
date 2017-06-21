@@ -4,7 +4,7 @@
 
 <% @conversation.receipts_for(current_user).each do |r| %>
   <div>
-    <%= r.message.sender %>
+    <%= r.message.sender.name %> <b>wrote:</b>
   </div>
 
   <div>
@@ -16,5 +16,5 @@
   <div>
     <%= text_area_tag :body%>
   </div>
-  <%= submit_tag %>
+  <%= submit_tag 'Send' %>
 <% end %>
