@@ -3,16 +3,21 @@ class ConversationsController < ApplicationController
   before_action :mailbox
   before_action :conversation, except: [:index]
   before_action :box, only: [:index]
+  before_action :unread_msg
 
   def index
     if @box.eql? 'inbox'
       @conversations = @mailbox.inbox
+    elsif @box.eql? 'unread'
+      @conversations = @mailbox.inbox.unread(current_user)
     elsif @box.eql? 'sent'
       @conversations = @mailbox.sentbox
     else
       @conversations = @mailbox.trash
     end
     @conversations = @conversations.paginate(page: params[:page], per_page: 10)
+
+    flash[:danger] = "You have #{@unread_count} unread messages" if @unread_count > 0
   end
 
   def show; end
@@ -50,11 +55,12 @@ class ConversationsController < ApplicationController
     flash[:success] = 'The conversation was marked as read.'
     redirect_to conversations_path
   end
-  
+
   private
 
   def mailbox
     @mailbox ||= current_user.mailbox
+    @unread_count = current_user.unread_inbox_count
   end
 
   def conversation
@@ -62,9 +68,16 @@ class ConversationsController < ApplicationController
   end
 
   def box
-    if params[:box].blank? || !%w[inbox sent trash].include?(params[:box])
+    if params[:box].blank? || !%w[inbox sent trash unread].include?(params[:box])
       params[:box] = 'inbox'
     end
     @box = params[:box]
+  end
+
+  def unread_msg
+    @unread = current_user.mailbox.conversations.select do |c|
+       c if c.is_unread?(current_user)
+    end
+    @unread
   end
 end
