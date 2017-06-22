@@ -11,25 +11,24 @@
   <body>
     <div class="container">
       <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>">
+        <div class="alert alert-<%= key %> alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <%= value %>
         </div>
       <% end %>
       
-      <nav class="navbar navbar-inverse">
+      <nav class="navbar">
         <div class="container">
-          <div class="navbar-header">
-            <%= link_to 'Messenger', root_path, class: 'navbar-brand' %>
-          </div>
-          <ul class="nav navbar-nav">
+          <ol class="breadcrumb">
             <% if user_signed_in? %>
+              <li><%= link_to 'Messenger', root_path %></li>
               <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
               <li><%= link_to 'Your Conversations', conversations_path %></li>
               <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
             <% else %>
               <li><%= link_to 'Log In', new_user_session_path %></li>
             <% end %>
-          </ul>
+          </ol>
         </div>
       </nav>
       
