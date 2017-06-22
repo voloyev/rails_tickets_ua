@@ -12,7 +12,7 @@
   </div>
   
   <div>
-    <%= select_tag 'recipients', recipients_options, multiple: false, title: "Choose one of the following...", class: 'form-control' %>
+    <%= select_tag 'recipients', recipients_options(@chosen_recipient), multiple: false, title: "Choose one of the following...", class: 'form-control' %>
   </div>
   
   <%= submit_tag 'Send', class: 'btn btn-primary' %>
