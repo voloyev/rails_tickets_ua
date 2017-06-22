@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  
   def index
     if current_user.admin?
       @users = User.order('created_at DESC').paginate(page: params[:page], per_page: 30)
