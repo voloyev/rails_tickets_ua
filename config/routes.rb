@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root 'conversations#index'
 
+  resources :users, only: [:index]
+
   resources :conversations do
     member do
       post :reply
