@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'conversations#index'
 
-  resources :users, only: [:index]
+  resources :users
 
   resources :conversations do
     member do

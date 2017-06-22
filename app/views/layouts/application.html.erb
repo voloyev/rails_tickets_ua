@@ -28,6 +28,9 @@
             <% else %>
               <li><%= link_to 'Log In', new_user_session_path %></li>
             <% end %>
+            <% if current_user.admin == true %>
+              <li> <%= link_to 'List of Users', users_path%> </li>
+            <% end %>
           </ol>
         </div>
       </nav>
