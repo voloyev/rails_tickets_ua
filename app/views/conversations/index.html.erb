@@ -1,9 +1,18 @@
 <% page_header 'Your conversations' %>
+
 <div class="row">
+  <p><%= link_to 'Start conversation', new_message_path, class: 'btn btn-primary' %>
+    <%= link_to 'Search for new email', '#', onclick: 'location.reload(true);', class: 'btn btn-success' %>
+    <button class="btn btn-primary" type="button">
+      Unread Messages <span class="badge"><%= "#{@unread_count}" %></span>
+    </button>
+  </p>
+
   <div class="col-sm-9">
     <ul class="nav nav-tabs nav-justified">
       <%= mailbox_section 'inbox', @box %>
       <%= mailbox_section 'sent', @box %>
+      <%= mailbox_section 'unread', @box %>
       <%= mailbox_section 'trash', @box %>
     </ul>
   </div>
